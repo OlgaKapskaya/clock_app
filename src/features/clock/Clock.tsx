@@ -1,21 +1,22 @@
 import {useEffect, useState} from "react";
 import {ITimezone} from "react-timezone-select";
 import moment from "moment-timezone";
-import timezone from "dayjs/plugin/timezone";
 import {AnalogClock} from "./analog-clock/AnalogClock";
 import {DigitalClock} from "./digital-clock/DigitalClock";
 import {Timezones} from "./timezones/Timezones";
+
+import s from "./Clock.module.css"
 
 export const Clock = () => {
     const [currentTimezone, setCurrentTimezone] = useState<ITimezone>(Intl.DateTimeFormat().resolvedOptions().timeZone);
     const [datetime, setDatetime] = useState(moment());
 
-
     //@ts-ignore
     const tz = currentTimezone.value ?? currentTimezone
+
     useEffect(() => {
         setDatetime(moment.tz(tz));
-    }, [timezone, datetime]);
+    }, [currentTimezone, datetime]);
 
     useEffect(() => {
         let timerID = setInterval(() => {
@@ -25,8 +26,9 @@ export const Clock = () => {
             clearInterval(timerID)
         }
     }, [])
+
     return (
-        <div className="clock_wrapper">
+        <div className={s.clock_wrapper}>
             <AnalogClock date={datetime}/>
             <DigitalClock date={datetime}/>
             <Timezones timezone={currentTimezone} onChange={setCurrentTimezone}/>
