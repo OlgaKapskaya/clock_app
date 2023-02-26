@@ -1,37 +1,123 @@
 .clock {
-    width: 120px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.clock .digital_clock {
-    padding: 10px;
-}
-.clock .analog_clock {
-    width: 200px;
-    height: 200px;
-    border: solid 1px #000;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    color: #444;
+    text-align: center;
 }
 
-.clock .analog_clock .dial {
+.clock::after {
+    background: #aaa;
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     position: absolute;
+    z-index: 2;
+    top: 50%;
     left: 50%;
-    width: 100px;
-    height: 100px;
-    transform-origin: bottom left;
+    transform: translate(-50%, -50%);
+    border: 2px solid #fff;
 }
-.clock .analog_clock .dial.seconds {
-    border-left: solid 1px green;
+
+.hour_hand {
+    position: absolute;
+    width: 6px;
+    height: 60px;
+    background: #222;
+    top: 30%;
+    left: 49%;
+    transform-origin: bottom;
 }
-.clock .analog_clock .dial.minutes {
-    border-left: solid 1px #c00;
+
+.min_hand {
+    position: absolute;
+    width: 4px;
+    height: 80px;
+    background: #444;
+    top: 22.5%;
+    left: 49%;
+    transform-origin: bottom;
 }
-.clock .analog_clock .dial.hours {
-    /*width: 35px;*/
-    /*height: 35px;*/
-    /*top: 15px;*/
-    border-left: solid 2px #000;
+
+.sec_hand {
+    position: absolute;
+    width: 2px;
+    height: 118px;
+    background: red;
+    top: 10.5%;
+    left: 50%;
+    transform-origin: bottom;
+}
+
+.clock span {
+    position: absolute;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+}
+
+.twelve {
+    top: 10px;
+    left: 46%;
+}
+
+.one {
+    top: 10%;
+    right: 26%;
+}
+
+.eleven {
+    top: 10%;
+    left: 26%;
+}
+
+.two {
+    top: 25%;
+    right: 10%;
+}
+
+.three {
+    right: 10px;
+    top: 46%;
+}
+
+.four {
+    right: 30px;
+    top: 67%;
+}
+
+.five {
+    right: 78px;
+    top: 80%;
+}
+
+.six {
+    bottom: 10px;
+    left: 50%;
+}
+
+.seven {
+    left: 80px;
+    top: 82%;
+}
+
+.eight {
+    left: 30px;
+    top: 67%;
+}
+
+.nine {
+    left: 10px;
+    top: 46%;
+}
+
+.ten {
+    top: 25%;
+    left: 10%;
 }
