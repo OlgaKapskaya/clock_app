@@ -1,53 +1,52 @@
-import {FC, memo, useCallback, useEffect} from "react";
-import {ITimezone} from "react-timezone-select";
-import {AnalogClock} from "./analog-clock/AnalogClock";
-import {DigitalClock} from "./digital-clock/DigitalClock";
-import {Timezones} from "./timezones/Timezones";
+import { FC, memo, useCallback, useEffect } from 'react'
+import { ITimezone } from 'react-timezone-select'
+import { AnalogClock } from './analog-clock/AnalogClock'
+import { DigitalClock } from './digital-clock/DigitalClock'
+import { Timezones } from './timezones/Timezones'
 
-import s from "./ClockWrapper.module.css"
-import {useDispatch} from "react-redux";
-import {setTime, setTimezone} from "../clockSlice";
-import {useAppSelector} from "../../../common/hooks/useAppSelector";
+import s from './ClockWrapper.module.css'
+import { useDispatch } from 'react-redux'
+import { setTime, setTimezone } from '../clockSlice'
+import { useAppSelector } from '../../../common/hooks/useAppSelector'
 
 type ClockWrapperType = {
-    id: number
+  id: number
 }
 
-export const ClockWrapper: FC<ClockWrapperType> = memo(({id}) => {
-    const clockArray = useAppSelector(state => state.clock.clock)
-    const currentClock = clockArray.filter(elem => elem.id === id)[0]
+export const ClockWrapper: FC<ClockWrapperType> = memo(({ id }) => {
+  const clockArray = useAppSelector((state) => state.clock.clock)
+  const currentClock = clockArray.filter((elem) => elem.id === id)[0]
 
-    const currentTimezone = currentClock.currentTimezone
-    const datetime = currentClock.datetime
+  const currentTimezone = currentClock.currentTimezone
+  const datetime = currentClock.datetime
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    const onChangeTimezone = useCallback((timezone: ITimezone) => {
-        dispatch(setTimezone({id, timezone}))
-    }, [])
+  const onChangeTimezone = useCallback((timezone: ITimezone) => {
+    dispatch(setTimezone({ id, timezone }))
+  }, [])
 
-    //@ts-ignore
-    const tz = currentTimezone.value ?? currentTimezone
+  //@ts-ignore
+  const tz = currentTimezone.value ?? currentTimezone
 
-    useEffect(() => {
-        dispatch(setTime({id, timezone: tz}))
-    }, [currentTimezone]);
+  useEffect(() => {
+    dispatch(setTime({ id, timezone: tz }))
+  }, [currentTimezone])
 
-    useEffect(() => {
-        let timerID = setInterval(() => {
-            dispatch(setTime({id, timezone: tz}))
-        }, 1000)
-        return () => {
-            clearInterval(timerID)
-        }
-    }, [tz])
+  useEffect(() => {
+    let timerID = setInterval(() => {
+      dispatch(setTime({ id, timezone: tz }))
+    }, 1000)
+    return () => {
+      clearInterval(timerID)
+    }
+  }, [tz])
 
-
-    return (
-        <div className={s.clock_wrapper}>
-            <AnalogClock date={datetime}/>
-            <DigitalClock date={datetime}/>
-            <Timezones timezone={currentTimezone} onChange={onChangeTimezone}/>
-        </div>
-    )
+  return (
+    <div className={s.clock_wrapper}>
+      <AnalogClock date={datetime} />
+      <DigitalClock date={datetime} />
+      <Timezones timezone={currentTimezone} onChange={onChangeTimezone} />
+    </div>
+  )
 })

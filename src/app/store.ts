@@ -1,22 +1,15 @@
-import {
-    configureStore,
-    getDefaultMiddleware,
-} from "@reduxjs/toolkit";
-import {clockReducer} from "../features/clock/clockSlice";
-
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { clockReducer } from '../features/clock/clockSlice'
 
 export const store = configureStore({
-    reducer: {
-        clock: clockReducer,
-    },
-    middleware: [
-        ...getDefaultMiddleware({
-            serializableCheck: false
-        })
-    ],
+  reducer: {
+    clock: clockReducer,
+  },
+  middleware: [
+    ...getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  ],
 })
 
 export type AppRootStateType = ReturnType<typeof store.getState>
-
-//@ts-ignore
-window.state = store
