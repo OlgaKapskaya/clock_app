@@ -1,4 +1,6 @@
 .select {
     position: relative;
     bottom: -150px;
+
+    font-size: 12px;
 }

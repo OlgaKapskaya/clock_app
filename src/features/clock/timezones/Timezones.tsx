@@ -1,5 +1,5 @@
 import TimezoneSelect, {ITimezone, ITimezoneOption} from "react-timezone-select";
-import {FC} from "react";
+import {FC, memo} from "react";
 import s from "./Timezones.module.css"
 
 type TimezonesType = {
@@ -7,7 +7,7 @@ type TimezonesType = {
     onChange: (timezone: ITimezoneOption) => void
 }
 
-export const Timezones:FC<TimezonesType> = ({timezone, onChange}) => {
+export const Timezones:FC<TimezonesType> = memo(({timezone, onChange}) => {
     return (
         <div className={s.select}>
                 <TimezoneSelect
@@ -17,4 +17,4 @@ export const Timezones:FC<TimezonesType> = ({timezone, onChange}) => {
         </div>
 
     )
-}
+})
