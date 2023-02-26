@@ -15,17 +15,13 @@ export const Clock = () => {
     const tz = currentTimezone.value ?? currentTimezone
 
     useEffect(() => {
-        setDatetime(moment.tz(tz));
-    }, [currentTimezone, datetime]);
-
-    useEffect(() => {
         let timerID = setInterval(() => {
-            setDatetime(moment())
+            setDatetime(moment.tz(tz));
         }, 1000)
         return () => {
             clearInterval(timerID)
         }
-    }, [])
+    }, [currentTimezone])
 
     return (
         <div className={s.clock_wrapper}>

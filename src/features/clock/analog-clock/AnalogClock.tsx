@@ -5,7 +5,14 @@ import {Moment} from "moment-timezone";
 export type ClockType = {
     date: Moment
 }
-export const AnalogClock: FC<ClockType>= ({date}) => {
+
+const dial = [
+    {style: s.twelve, value: 12}, {style: s.one, value: 1}, {style: s.two, value: 2}, {style: s.three, value: 3},
+    {style: s.four, value: 4}, {style: s.five, value: 5}, {style: s.six, value: 6}, {style: s.seven, value: 7},
+    {style: s.eight, value: 8}, {style: s.nine, value: 9}, {style: s.ten, value: 10}, {style: s.eleven, value: 11}
+]
+
+export const AnalogClock: FC<ClockType> = ({date}) => {
 
     const secondsStyle = {
         transform: `rotateZ(${date.seconds() * 6}deg)`
@@ -16,32 +23,14 @@ export const AnalogClock: FC<ClockType>= ({date}) => {
     const hoursStyle = {
         transform: `rotateZ(${date.hours() * 30}deg)`
     };
+
     return (
-            <div className={s.clock}>
-                <div
-                    className={s.hour_hand}
-                    style={hoursStyle}
-                />
-                <div
-                    className={s.min_hand}
-                    style={minutesStyle}
-                />
-                <div
-                    className={s.sec_hand}
-                    style={secondsStyle}
-                />
-                <span className={s.twelve}>12</span>
-                <span className={s.one}>1</span>
-                <span className={s.two}>2</span>
-                <span className={s.three}>3</span>
-                <span className={s.four}>4</span>
-                <span className={s.five}>5</span>
-                <span className={s.six}>6</span>
-                <span className={s.seven}>7</span>
-                <span className={s.eight}>8</span>
-                <span className={s.nine}>9</span>
-                <span className={s.ten}>10</span>
-                <span className={s.eleven}>11</span>
-            </div>
+        <div className={s.clock}>
+            <div className={s.hour_hand} style={hoursStyle}/>
+            <div className={s.min_hand} style={minutesStyle}/>
+            <div className={s.sec_hand} style={secondsStyle}/>
+
+            {dial.map((elem, index) => <span key={index} className={elem.style}>{elem.value}</span>)}
+        </div>
     )
 }
