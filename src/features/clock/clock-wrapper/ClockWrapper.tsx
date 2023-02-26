@@ -44,6 +44,7 @@ export const ClockWrapper: FC<ClockWrapperType> = memo(({ id }) => {
 
   return (
     <div className={s.clock_wrapper}>
+      <span style={{ position: "relative", top: "-20px"}}>{tz}</span>
       <AnalogClock date={datetime} />
       <DigitalClock date={datetime} />
       <Timezones timezone={currentTimezone} onChange={onChangeTimezone} />
