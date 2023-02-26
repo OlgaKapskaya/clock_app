@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {ClockType} from "../analog-clock/AnalogClock";
-import {formatTime} from "../../../common/helpers/formatTime";
+import {formatTime} from "../../../../common/helpers/formatTime";
 import s from "./DigitalClock.module.css"
 
 export const DigitalClock: FC<ClockType> = ({date}) => {

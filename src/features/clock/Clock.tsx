@@ -1,33 +1,35 @@
-import {useCallback, useEffect, useState} from "react";
-import {ITimezone} from "react-timezone-select";
-import moment from "moment-timezone";
-import {AnalogClock} from "./analog-clock/AnalogClock";
-import {DigitalClock} from "./digital-clock/DigitalClock";
-import {Timezones} from "./timezones/Timezones";
-
+import {ClockWrapper} from "./clock-wrapper/ClockWrapper";
 import s from "./Clock.module.css"
+import {FC, ReactNode} from "react";
+import {useDispatch} from "react-redux";
+import {createClock} from "./clockSlice";
 
-export const Clock = () => {
-    const [currentTimezone, setCurrentTimezone] = useState<ITimezone>(Intl.DateTimeFormat().resolvedOptions().timeZone);
-    const [datetime, setDatetime] = useState(moment());
+type ClockType = {
+    count?: number
+}
 
-    const onChangeTimezone = useCallback((timezone: ITimezone) => {
-        setCurrentTimezone(timezone)
-    }, [])
+/**
+ *
+ * @param count - count of clock elements
+ */
 
-    //@ts-ignore
-    const tz = currentTimezone.value ?? currentTimezone
+export const Clock:FC<ClockType> = ({count}) => {
+    const dispatch = useDispatch()
+    const clockCount = count ?? 1
 
-    useEffect(() => {
-        setDatetime(moment.tz(tz));
-    }, [currentTimezone, datetime]);
+
+    const createClock1 = () => {
+        let clocks:ReactNode[] = []
+        for (let i=0; i < clockCount; i++) {
+            clocks = [...clocks, <ClockWrapper id={i}/>]
+            dispatch(createClock({id: i}))
+        }
+        return clocks
+    }
 
     return (
-        <div className={s.clock_wrapper}>
-            <AnalogClock date={datetime}/>
-            <DigitalClock date={datetime}/>
-            <Timezones timezone={currentTimezone} onChange={onChangeTimezone}/>
+        <div className={s.clock}>
+            {createClock1()}
         </div>
     )
-
 }
