@@ -25,13 +25,13 @@ export const clockSlice = createSlice({
       state.clock.push(newClock)
     },
 
-    setTime: (state, action: PayloadAction<{ id: number; timezone: string }>) => {
+    setTime: (state, action: PayloadAction<{ id: number; datetime: Moment }>) => {
       state.clock = state.clock.map((elem) => {
         return elem.id !== action.payload.id
           ? elem
           : {
               ...elem,
-              datetime: moment.tz(action.payload.timezone),
+              datetime: action.payload.datetime,
             }
       })
     },

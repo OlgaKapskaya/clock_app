@@ -17,7 +17,7 @@ export const Clock: FC<ClockType> = ({ count }) => {
   const dispatch = useDispatch()
   const clockCount = count ?? 1
 
-  const createClock1 = () => {
+  const addClock = () => {
     let clocks: ReactNode[] = []
     for (let i = 0; i < clockCount; i++) {
       clocks = [...clocks, <ClockWrapper id={i} />]
@@ -26,5 +26,5 @@ export const Clock: FC<ClockType> = ({ count }) => {
     return clocks
   }
 
-  return <div className={s.clock}>{createClock1()}</div>
+  return <div className={s.clock}>{addClock()}</div>
 }
