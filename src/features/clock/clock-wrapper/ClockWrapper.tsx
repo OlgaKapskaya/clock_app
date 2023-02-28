@@ -11,7 +11,7 @@ type ClockWrapperType = {
 }
 
 export const ClockWrapper: FC<ClockWrapperType> = memo(({ id }) => {
- const {datetime, timezone, currentTimezone, onChangeTimezone} = useTime(id)
+  const { datetime, timezone, currentTimezone, onChangeTimezone } = useTime(id)
 
   return (
     <div className={s.clock_wrapper}>

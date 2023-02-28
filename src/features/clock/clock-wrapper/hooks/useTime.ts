@@ -38,5 +38,5 @@ export const useTime = (id: number) => {
   }, [currentTimezone])
 
 
-  return {datetime, timezone, currentTimezone, onChangeTimezone}
+  return { datetime, timezone, currentTimezone, onChangeTimezone }
 }
